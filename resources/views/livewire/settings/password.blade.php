@@ -16,18 +16,25 @@ new class extends Component {
      */
     public function updatePassword(): void
     {
+        $user = Auth::user();
+
+        $rules = [
+            'password' => ['required', 'string', Password::defaults(), 'confirmed'],
+        ];
+
+        if (is_null($user->google_id)) {
+            $rules['current_password'] = ['required', 'string', 'current_password'];
+        }
+
         try {
-            $validated = $this->validate([
-                'current_password' => ['required', 'string', 'current_password'],
-                'password' => ['required', 'string', Password::defaults(), 'confirmed'],
-            ]);
+            $validated = $this->validate($rules);
         } catch (ValidationException $e) {
             $this->reset('current_password', 'password', 'password_confirmation');
 
             throw $e;
         }
 
-        Auth::user()->update([
+        $user->update([
             'password' => Hash::make($validated['password']),
         ]);
 
