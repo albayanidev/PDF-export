@@ -13,26 +13,27 @@ return new class extends Migration
     {
         Schema::create('data', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('work_nature')->nullable();
             $table->string('work_quality')->nullable();
-            $table->integer('purchased_items')->nullable();
+            $table->string('purchased_items')->nullable();
             $table->dateTime('approval_date')->nullable();
-            $table->integer('approvals')->nullable();
+            $table->string('approvals_number')->nullable();
             $table->string('1_offer')->nullable();
             $table->string('2_offer')->nullable();
             $table->string('3_offer')->nullable();
             $table->string('4_offer')->nullable();
-            $table->integer('without_vat')->nullable();
+            $table->string('amount_without_val')->nullable();
             $table->dateTime('report_issuance_date')->nullable();
             $table->dateTime('report_issuance_time')->nullable();
             $table->string('company_receiving_offer')->nullable();
             $table->string('address')->nullable();
-            $table->integer('tax_number')->nullable();
+            $table->string('tax_number')->nullable();
             $table->string('bank_branch_name')->nullable();
-            $table->integer('bank_branch_code')->nullable();
-            $table->integer('bank_account_number')->nullable();
+            $table->string('bank_branch_code')->nullable();
+            $table->string('bank_account_number')->nullable();
             $table->string('tax_office')->nullable();
-            $table->integer('invoice_amount')->nullable();
+            $table->string('invoice_amount')->nullable();
             $table->string('purchasing_commission_member_name')->nullable();
             $table->string('commission_member_title')->nullable();
             $table->string('department_head')->nullable();
@@ -40,8 +41,8 @@ return new class extends Migration
             $table->dateTime('invoice_date')->nullable();
             $table->string('inspection_member_name')->nullable();
             $table->string('inspection_member_title')->nullable();
-            $table->integer('warehouse_depot_sequence_number')->nullable();
-            $table->integer('warehouse_depot_volumn_number')->nullable();
+            $table->string('warehouse_depot_sequence_number')->nullable();
+            $table->string('warehouse_depot_volumn_number')->nullable();
             $table->dateTime('need_notification_date')->nullable();
             $table->string('school_priniciple')->nullable();
             $table->string('vice_principle')->nullable();

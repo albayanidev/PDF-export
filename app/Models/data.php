@@ -4,19 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class data extends Model
+class Data extends Model
 {
     protected $fillable = [
         'work_nature',
         'work_quality',
         'purchased_items',
         'approval_date',
-        'approvals',
+        'approvals_number',
         '1_offer',
         '2_offer',
         '3_offer',
         '4_offer',
-        'without_vat',
+        'amount_without_vat',
         'report_issuance_date',
         'report_issuance_time',
         'company_receiving_offer',
@@ -40,4 +40,9 @@ class data extends Model
         'school_priniciple',
         'vice_principle',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

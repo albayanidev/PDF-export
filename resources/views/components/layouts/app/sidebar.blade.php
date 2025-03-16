@@ -7,27 +7,23 @@
         <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
-            <a href="{{ route('dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
+            <a href="{{ route('dashboard') }}" class="flex items-center mr-5 space-x-2" wire:navigate>
                 <x-app-logo />
             </a>
 
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    <flux:navlist.item icon="home" :href="route('pages.input')" wire:navigate>{{ __('Input') }}</flux:navlist.item>
+                    <flux:navlist.item icon="home" :href="route('pages.first')" wire:navigate>{{ __('First Page') }}</flux:navlist.item>
+                    <flux:navlist.item icon="home" :href="route('pages.second')" wire:navigate>{{ __('Second Page') }}</flux:navlist.item>
+                    <flux:navlist.item icon="home" :href="route('pages.third')" wire:navigate>{{ __('Third Page') }}</flux:navlist.item>
+                    <flux:navlist.item icon="home" :href="route('pages.fourth')" wire:navigate>{{ __('Fourth Page') }}</flux:navlist.item>
+                    <flux:navlist.item icon="home" :href="route('pages.fifth')" wire:navigate>{{ __('Fifth Page') }}</flux:navlist.item>
+                    <flux:navlist.item icon="home" :href="route('pages.sixth')" wire:navigate>{{ __('Sixth Page') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
             <flux:spacer />
-
-            <flux:navlist variant="outline">
-                {{-- <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                {{ __('Repository') }}
-                </flux:navlist.item>
-
-                <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits" target="_blank">
-                {{ __('Documentation') }}
-                </flux:navlist.item> --}}
-            </flux:navlist>
 
             <!-- Desktop User Menu -->
             <flux:dropdown position="bottom" align="start">
@@ -41,17 +37,17 @@
                     <flux:menu.radio.group>
                         <div class="p-0 text-sm font-normal">
                             <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                                <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
+                                <span class="relative flex w-8 h-8 overflow-hidden rounded-lg shrink-0">
                                     <span
-                                        class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white"
+                                        class="flex items-center justify-center w-full h-full text-black rounded-lg bg-neutral-200 dark:bg-neutral-700 dark:text-white"
                                     >
                                         {{ auth()->user()->initials() }}
                                     </span>
                                 </span>
 
-                                <div class="grid flex-1 text-left text-sm leading-tight">
-                                    <span class="truncate font-semibold">{{ auth()->user()->name }}</span>
-                                    <span class="truncate text-xs">{{ auth()->user()->email }}</span>
+                                <div class="grid flex-1 text-sm leading-tight text-left">
+                                    <span class="font-semibold truncate">{{ auth()->user()->name }}</span>
+                                    <span class="text-xs truncate">{{ auth()->user()->email }}</span>
                                 </div>
                             </div>
                         </div>
@@ -91,17 +87,17 @@
                     <flux:menu.radio.group>
                         <div class="p-0 text-sm font-normal">
                             <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                                <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
+                                <span class="relative flex w-8 h-8 overflow-hidden rounded-lg shrink-0">
                                     <span
-                                        class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white"
+                                        class="flex items-center justify-center w-full h-full text-black rounded-lg bg-neutral-200 dark:bg-neutral-700 dark:text-white"
                                     >
                                         {{ auth()->user()->initials() }}
                                     </span>
                                 </span>
 
-                                <div class="grid flex-1 text-left text-sm leading-tight">
-                                    <span class="truncate font-semibold">{{ auth()->user()->name }}</span>
-                                    <span class="truncate text-xs">{{ auth()->user()->email }}</span>
+                                <div class="grid flex-1 text-sm leading-tight text-left">
+                                    <span class="font-semibold truncate">{{ auth()->user()->name }}</span>
+                                    <span class="text-xs truncate">{{ auth()->user()->email }}</span>
                                 </div>
                             </div>
                         </div>
