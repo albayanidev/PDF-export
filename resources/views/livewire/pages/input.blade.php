@@ -1,62 +1,69 @@
-
-
 <?php
 
 use App\Models\User;
+use App\Models\Data;
+use App\Livewire\Forms\DataForm;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
+use function Livewire\Volt\{form};
 
-new class extends Component {
-    public string $name = '';
-    public string $email = '';
+form(PostForm::class);
 
-    /**
-     * Mount the component.
-     */
-    public function mount(): void
-    {
-        $this->name = Auth::user()->name;
-        $this->email = Auth::user()->email;
-    }
+$updateData = function () {
+    $this->form->store();
 
-}; ?>
+    $this->dispatch('data-updated');
+};
+
+?>
 
 <section class="w-full">
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        <flux:input label="Nature of the Work" />
-        <flux:input label="Quality of the Work" />
-        <flux:input label="Number of Items Purchased" />
-        <flux:input label="Approval Date" type="date" />
-        <flux:input label="Number of Approvals" />
-        <flux:input label="1st Offer" />
-        <flux:input label="2nd Offer" />
-        <flux:input label="3rd Offer" />
-        <flux:input label="4th Offer" />
-        <flux:input label="Amount Without VAT" />
-        <flux:input label="Need Report Issuance Date" type="date" />
-        <flux:input label="Need Report Issuance Time" type="date" />
-        <flux:input label="Company Receiving the Offer" />
-        <flux:input label="Address" />
-        <flux:input label="Tax Number" />
-        <flux:input label="Bank Branch Name"  />
-        <flux:input label="Bank Branch Code" />
-        <flux:input label="Bank Account Number" />
-        <flux:input label="Tax Office" />
-        <flux:input label="Invoice Amount" />
-        <flux:input label="Purchasing Commission Member's Name" />
-        <flux:input label="Commission Memeber's Title" />
-        <flux:input label="Department Head" />
-        <flux:input label="Department" />
-        <flux:input label="Invoice Date" type="date" />
-        <flux:input label="Inspection Member's Name" />
-        <flux:input label="Inspection Member's Title" />
-        <flux:input label="Warehouse-Depot Sequence Number" />
-        <flux:input label="Warehouse-Depot Volume Number" />
-        <flux:input label="Need Notification Date" type="date" />
-        <flux:input label="School Prinicipal" />
-        <flux:input label="Vice Prinicipal" />
-    </div>
+    <form wire:submit="updateData">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <flux:input wire:model="form.work_nature" label="Nature of the Work" />
+            <flux:input wire:model="form.work_quality" label="Quality of the Work" />
+            <flux:input wire:model="form.purchased_items" label="Number of Items Purchased" />
+            <flux:input wire:model="form.approval_date" label="Approval Date" type="date" />
+            <flux:input wire:model="form.approvals_number" label="Number of Approvals" />
+            <flux:input wire:model="form.1_offer" label="1st Offer" />
+            <flux:input wire:model="form.2_offer" label="2nd Offer" />
+            <flux:input wire:model="form.3_offer" label="3rd Offer" />
+            <flux:input wire:model="form.4_offer" label="4th Offer" />
+            <flux:input wire:model="form.amount_without_vat" label="Amount Without VAT" />
+            <flux:input wire:model="form.report_issuance_date" label="Need Report Issuance Date" type="date" />
+            <flux:input wire:model="form.report_issuance_time" label="Need Report Issuance Time" type="date" />
+            <flux:input wire:model="form.company_receiving_offer" label="Company Receiving the Offer" />
+            <flux:input wire:model="form.address" label="Address" />
+            <flux:input wire:model="form.tax_number" label="Tax Number" />
+            <flux:input wire:model="form.bank_branch_name" label="Bank Branch Name"  />
+            <flux:input wire:model="form.bank_branch_code" label="Bank Branch Code" />
+            <flux:input wire:model="form.bank_account_number" label="Bank Account Number" />
+            <flux:input wire:model="form.tax_office" label="Tax Office" />
+            <flux:input wire:model="form.invoice_amount" label="Invoice Amount" />
+            <flux:input wire:model="form.purchasing_commission_member_name" label="Purchasing Commission Member's Name" />
+            <flux:input wire:model="form.commission_member_title" label="Commission Memeber's Title" />
+            <flux:input wire:model="form.department_head" label="Department Head" />
+            <flux:input wire:model="form.department" label="Department" />
+            <flux:input wire:model="form.invoice_date" label="Invoice Date" type="date" />
+            <flux:input wire:model="form.inspection_member_name" label="Inspection Member's Name" />
+            <flux:input wire:model="form.inspection_member_title" label="Inspection Member's Title" />
+            <flux:input wire:model="form.warehouse_depot_sequence_number" label="Warehouse-Depot Sequence Number" />
+            <flux:input wire:model="form.warehouse_depot_volumn_number" label="Warehouse-Depot Volume Number" />
+            <flux:input wire:model="form.need_notification_date" label="Need Notification Date" type="date" />
+            <flux:input wire:model="form.school_priniciple" label="School Prinicipal" />
+            <flux:input wire:model="form.vice_principle" label="Vice Prinicipal" />
+        </div>
+        <div class="flex items-center gap-4 mt-6">
+            <div class="flex items-center justify-end">
+                <flux:button variant="primary" type="submit" class="w-full">{{ __('Save') }}</flux:button>
+            </div>
+
+            <x-action-message class="me-3" on="data-updated">
+                {{ __('Saved.') }}
+            </x-action-message>
+        </div>
+    </form>
 </section>
 
