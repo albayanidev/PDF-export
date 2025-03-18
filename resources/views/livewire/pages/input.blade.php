@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
 use function Livewire\Volt\{form};
 
-form(PostForm::class);
+form(DataForm::class);
 
 $updateData = function () {
     $this->form->store();

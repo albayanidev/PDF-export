@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('2_offer')->nullable();
             $table->string('3_offer')->nullable();
             $table->string('4_offer')->nullable();
-            $table->string('amount_without_val')->nullable();
+            $table->string('amount_without_vat')->nullable();
             $table->dateTime('report_issuance_date')->nullable();
             $table->dateTime('report_issuance_time')->nullable();
             $table->string('company_receiving_offer')->nullable();
