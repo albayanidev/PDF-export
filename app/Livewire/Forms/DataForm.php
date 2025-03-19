@@ -2,10 +2,7 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Attributes\Validate;
 use Livewire\Form;
-use App\Models\User;
-use App\Models\Data;
 use Illuminate\Support\Facades\Auth;
 
 class DataForm extends Form
