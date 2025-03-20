@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Data extends Model
 {
     protected $fillable = [
+        'user_id',
         'work_nature',
         'work_quality',
         'purchased_items',

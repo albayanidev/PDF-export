@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
     protected $fillable = [
+        'user_id',
         'type',
         'custom',
         'written_in_price',

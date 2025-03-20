@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
-use function Livewire\Volt\{state, mount,form, computed, with, usesPagination};
+use function Livewire\Volt\{state, mount, form, computed, with, usesPagination};
 
 form(OfferForm::class);
 
@@ -20,19 +20,33 @@ $store = function () {
     $this->form->store();
 
     $this->dispatch('offer-updated');
+    $this->modal('edit-offer')->close();
 };
 
+$edit = function ($id) {
+    $this->form->edit($id);
+    $this->modal('edit-offer')->show();
+};
+
+$resetForm = function () {
+    $this->form->resetForm();
+};
+
+$delete = function ($id) {
+    Offer::find($id)->delete();
+};
 ?>
 
 <section class="w-full">
 
     <flux:modal name="edit-offer" class="md:w-200">
-        <form wire:submit="store" class=" space-y-6">
+        <form wire:submit="store" class="space-y-6">
             <div>
                 <flux:heading size="lg">Company offer price</flux:heading>
             </div>
 
-            <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 ">
+            <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <input type="hidden" wire:model="form.offerId">
                 <flux:input wire:model="form.type" label="Type" placeholder="OKUL İLETİŞİM PAKETİ ALIMLARI" />
                 <flux:input wire:model="form.custom" label="Custom" placeholder="1" />
                 <flux:input wire:model="form.written_in_price" label="Written in price" placeholder="BİR" />
@@ -46,41 +60,41 @@ $store = function () {
                 <flux:button type="submit" variant="primary">Save</flux:button>
             </div>
         </form>
-
     </flux:modal>
 
     <div class="flex justify-between items-center">
         <input type="text" wire:model="search" placeholder="Search...">
         <flux:modal.trigger name="edit-offer">
-            <flux:button variant="primary">Create</flux:button>
+            <flux:button variant="primary" wire:click="resetForm">Create</flux:button>
         </flux:modal.trigger>
     </div>
     <table class="min-w-full divide-y divide-gray-200 mt-10">
         <thead>
             <tr>
                 <th>S.NO</th>
-                <th wire:click="handleSort('type')" class="cursor-pointer">Type</th>
-                <th wire:click="handleSort('custom')" class="cursor-pointer">Custom</th>
-                <th wire:click="handleSort('written_in_price')" class="cursor-pointer">Written in price</th>
-                <th wire:click="handleSort('sizewater')" class="cursor-pointer">Sizewater</th>
-                <th wire:click="handleSort('price')" class="cursor-pointer">Price</th>
-                <th wire:click="handleSort('amount')" class="cursor-pointer">Amount</th>
+                <th wire:click="handleSort('type')">Type</th>
+                <th wire:click="handleSort('custom')">Custom</th>
+                <th wire:click="handleSort('written_in_price')">Written in price</th>
+                <th wire:click="handleSort('sizewater')">Sizewater</th>
+                <th wire:click="handleSort('price')">Price</th>
+                <th wire:click="handleSort('amount')">Amount</th>
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-center pt-10">
             @foreach ($offers as $offer)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td class="p-4">{{ $loop->iteration }}</td>
                     <td>{{ $offer->type }}</td>
                     <td>{{ $offer->custom }}</td>
                     <td>{{ $offer->written_in_price }}</td>
                     <td>{{ $offer->sizewater }}</td>
                     <td>{{ $offer->price }}</td>
                     <td>{{ $offer->amount }}</td>
-                    <td>
-                        <button wire:click="edit({{ $offer->id }})">Edit</button>
-                        <button wire:click="delete({{ $offer->id }})">Delete</button>
+                    <td class="flex justify-center gap-2">
+                        <flux:button size="sm" variant="ghost" wire:click="edit({{ $offer->id }})" class="cursor-pointer">Edit</flux:button>
+                        <flux:button size="sm" variant="ghost" wire:confirm="Are you sure you want to delete this offer?" class="curosr-pointer"
+                        wire:click="delete({{ $offer->id }})">Delete</flux:button>
                     </td>
                 </tr>
             @endforeach
@@ -90,3 +104,11 @@ $store = function () {
         {{ $offers->links() }}
     </div>
 </section>
+
+<script>
+    document.addEventListener('livewire:load', function () {
+        @this.on('offer-updated', function () {
+            Livewire.emit('closeModal', 'edit-offer');
+        });
+    });
+</script>
