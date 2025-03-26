@@ -16,6 +16,8 @@ form(OfferForm::class);
 
 usesPagination();
 
+state(['search' => '']);
+
 with(fn () => ['offers' => Offer::paginate(10)]);
 
 $store = function () {
@@ -69,13 +71,10 @@ $download = function(){
     </flux:modal>
 
     <div class="flex justify-between items-center">
-        <input type="text" wire:model="search" placeholder="Search...">
-        <div>
             <flux:modal.trigger name="edit-offer">
                 <flux:button variant="primary" wire:click="resetForm">Create</flux:button>
             </flux:modal.trigger>
             <flux:button variant="filled" class="ml-2" wire:click="download">Download</flux:button>
-        </div>
     </div>
     <table class="min-w-full divide-y divide-gray-200 mt-10">
         <thead>
