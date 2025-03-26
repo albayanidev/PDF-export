@@ -3,12 +3,14 @@
 use App\Models\User;
 use App\Models\Offer;
 use App\Livewire\Forms\OfferForm;
+use App\Exports\OffersExport;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
 use function Livewire\Volt\{state, mount, form, computed, with, usesPagination};
+use Maatwebsite\Excel\Facades\Excel;
 
 form(OfferForm::class);
 
@@ -34,6 +36,10 @@ $resetForm = function () {
 
 $delete = function ($id) {
     Offer::find($id)->delete();
+};
+
+$download = function(){
+    return Excel::download(new OffersExport, 'offers.xlsx');
 };
 ?>
 
@@ -64,9 +70,12 @@ $delete = function ($id) {
 
     <div class="flex justify-between items-center">
         <input type="text" wire:model="search" placeholder="Search...">
-        <flux:modal.trigger name="edit-offer">
-            <flux:button variant="primary" wire:click="resetForm">Create</flux:button>
-        </flux:modal.trigger>
+        <div>
+            <flux:modal.trigger name="edit-offer">
+                <flux:button variant="primary" wire:click="resetForm">Create</flux:button>
+            </flux:modal.trigger>
+            <flux:button variant="filled" class="ml-2" wire:click="download">Download</flux:button>
+        </div>
     </div>
     <table class="min-w-full divide-y divide-gray-200 mt-10">
         <thead>
