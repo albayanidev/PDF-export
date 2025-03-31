@@ -7,13 +7,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
-use function Livewire\Volt\{form};
+use function Livewire\Volt\{form, mount};
 
 form(DataForm::class);
 
+mount(function () {
+    $user = Auth::user();
+    $data = $user->data();
+
+    $this->form->fill($data->first()->toArray());
+});
+
 $updateData = function () {
     $this->form->store();
-
     $this->dispatch('data-updated');
 };
 

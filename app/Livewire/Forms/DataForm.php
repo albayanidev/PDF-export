@@ -48,6 +48,19 @@ class DataForm extends Form
         'need_notification_date' => 'nullable|date',
     ];
 
+    public function mount()
+    {
+       $this->resetForm();
+    }
+
+    public function resetForm()
+    {
+        $user = Auth::user();
+        $data = $user->data()->first();
+
+        $this->fill($data->toArray());
+    }
+
     public function store()
     {
         $this->validate();
@@ -66,7 +79,7 @@ class DataForm extends Form
             ]))
         );
 
-        $this->reset();
+       $this->resetForm();
     }
 
     private function formatDates($data)
