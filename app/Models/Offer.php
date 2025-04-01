@@ -9,9 +9,9 @@ class Offer extends Model
     protected $fillable = [
         'user_id',
         'type',
-        'custom',
-        'written_in_price',
-        'sizewater',
+        'quantity',
+        'quantity_written',
+        'measurement',
         'price',
         'amount',
     ];

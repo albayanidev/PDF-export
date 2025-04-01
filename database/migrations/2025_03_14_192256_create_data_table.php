@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('purchased_items')->nullable();
             $table->dateTime('approval_date')->nullable();
             $table->string('approvals_number')->nullable();
-            $table->string('1_offer')->nullable();
-            $table->string('2_offer')->nullable();
-            $table->string('3_offer')->nullable();
-            $table->string('4_offer')->nullable();
+            $table->string('offer_1')->nullable();
+            $table->string('offer_2')->nullable();
+            $table->string('offer_3')->nullable();
+            $table->string('offer_4')->nullable();
             $table->string('amount_without_vat')->nullable();
             $table->dateTime('report_issuance_date')->nullable();
             $table->dateTime('report_issuance_time')->nullable();
@@ -44,8 +44,13 @@ return new class extends Migration
             $table->string('warehouse_depot_sequence_number')->nullable();
             $table->string('warehouse_depot_volumn_number')->nullable();
             $table->dateTime('need_notification_date')->nullable();
-            $table->string('school_priniciple')->nullable();
-            $table->string('vice_principle')->nullable();
+            $table->string('school_principal')->nullable();
+            $table->string('vice_principal')->nullable();
+            $table->string('nys_budget_amount')->nullable();
+            $table->string('document_number')->nullable();
+            $table->string('to_office')->nullable();
+            $table->string('nys_budget_allocation')->nullable();
+            $table->string('to_directorate')->nullable();
             $table->timestamps();
         });
     }

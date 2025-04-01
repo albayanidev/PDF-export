@@ -35,10 +35,15 @@ class DataForm extends Form
     public $inspection_member_name= '';
     public $inspection_member_title= '';
     public $warehouse_depot_sequence_number= '';
-    public $warehouse_depot_volume_number= '';
+    public $warehouse_depot_volumn_number= '';
     public $need_notification_date= '';
     public $school_principal= '';
     public $vice_principal= '';
+    public $nys_budget_amount= '';
+    public $document_number= '';
+    public $to_office= '';
+    public $nys_budget_allocation= '';
+    public $to_directorate= '';
 
     protected $rules = [
         'approval_date' => 'nullable|date',
@@ -58,15 +63,23 @@ class DataForm extends Form
         $user = Auth::user();
         $data = $user->data()->first();
 
-        $this->fill($data->toArray());
+        if ($data) {
+            $formattedData = $data->toArray();
+
+            foreach (['approval_date', 'report_issuance_date', 'report_issuance_time', 'invoice_date', 'need_notification_date'] as $field) {
+                if (!empty($formattedData[$field])) {
+                    $formattedData[$field] = \Carbon\Carbon::parse($formattedData[$field])->format('Y-m-d');
+                }
+            }
+
+            $this->fill($formattedData);
+        }
     }
 
     public function store()
     {
-        $this->validate();
-
         $user = Auth::user();
-        $data = $user->data()->updateOrCreate(
+        $user->data()->updateOrCreate(
             ['user_id' => $user->id],
             $this->formatDates($this->only([
                 'work_nature', 'work_quality', 'purchased_items', 'approval_date', 'approvals_number',
@@ -74,8 +87,8 @@ class DataForm extends Form
                 'report_issuance_time', 'company_receiving_offer', 'address', 'tax_number', 'bank_branch_name',
                 'bank_branch_code', 'bank_account_number', 'tax_office', 'invoice_amount', 'purchasing_commission_member_name',
                 'commission_member_title', 'department_head', 'department', 'invoice_date', 'inspection_member_name',
-                'inspection_member_title', 'warehouse_depot_sequence_number', 'warehouse_depot_volume_number',
-                'need_notification_date', 'school_principal', 'vice_principal'
+                'inspection_member_title', 'warehouse_depot_sequence_number', 'warehouse_depot_volumn_number',
+                'need_notification_date', 'school_principal', 'vice_principal','nys_budget_amount','document_number','to_office','nys_budget_allocation','to_directorate',
             ]))
         );
 

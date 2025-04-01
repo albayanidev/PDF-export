@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('type')->nullable();
-            $table->string('custom')->nullable();
-            $table->string('written_in_price')->nullable();
-            $table->string('sizewater')->nullable();
+            $table->string('quantity')->nullable();
+            $table->string('quantity_written')->nullable();
+            $table->string('measurement')->nullable();
             $table->string('price')->nullable();
             $table->string('amount')->nullable();
             $table->timestamps();

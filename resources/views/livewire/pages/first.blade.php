@@ -18,7 +18,7 @@ usesPagination();
 
 state(['search' => '']);
 
-with(fn () => ['offers' => Offer::paginate(10)]);
+with(fn () => ['offers' => Offer::where('user_id', Auth::id())->paginate(10)]);
 
 $store = function () {
     $this->form->store();
@@ -55,12 +55,12 @@ $download = function(){
 
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
                 <input type="hidden" wire:model="form.offerId">
-                <flux:input wire:model="form.type" label="Type" placeholder="OKUL İLETİŞİM PAKETİ ALIMLARI" />
-                <flux:input wire:model="form.custom" label="Custom" placeholder="1" />
-                <flux:input wire:model="form.written_in_price" label="Written in price" placeholder="BİR" />
-                <flux:input wire:model="form.sizewater" label="Sizewater" placeholder="Adet" />
-                <flux:input wire:model="form.price" label="Price" placeholder="8,000.00" />
-                <flux:input wire:model="form.amount" label="Amount" placeholder="8,000.00" />
+                <flux:input wire:model="form.type" label="Type" />
+                <flux:input wire:model="form.quantity" label="Quantity"/>
+                <flux:input wire:model="form.quantity_written" label="Quantity Written" />
+                <flux:input wire:model="form.measurement" label="Measurement" />
+                <flux:input wire:model="form.price" label="Price" />
+                <flux:input wire:model="form.amount" label="Amount" />
             </div>
 
             <div class="flex">
@@ -81,9 +81,9 @@ $download = function(){
             <tr>
                 <th>S.NO</th>
                 <th wire:click="handleSort('type')">Type</th>
-                <th wire:click="handleSort('custom')">Custom</th>
-                <th wire:click="handleSort('written_in_price')">Written in price</th>
-                <th wire:click="handleSort('sizewater')">Sizewater</th>
+                <th wire:click="handleSort('quantity')">Quantity</th>
+                <th wire:click="handleSort('quantity_written')">Quantity Written</th>
+                <th wire:click="handleSort('measurement')">Measurement</th>
                 <th wire:click="handleSort('price')">Price</th>
                 <th wire:click="handleSort('amount')">Amount</th>
                 <th>Actions</th>
@@ -94,9 +94,9 @@ $download = function(){
                 <tr>
                     <td class="p-4">{{ $loop->iteration }}</td>
                     <td>{{ $offer->type }}</td>
-                    <td>{{ $offer->custom }}</td>
-                    <td>{{ $offer->written_in_price }}</td>
-                    <td>{{ $offer->sizewater }}</td>
+                    <td>{{ $offer->quantity }}</td>
+                    <td>{{ $offer->quantity_written }}</td>
+                    <td>{{ $offer->measurement }}</td>
                     <td>{{ $offer->price }}</td>
                     <td>{{ $offer->amount }}</td>
                     <td class="flex justify-center gap-2">

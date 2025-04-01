@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Offer;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -13,7 +14,7 @@ class OffersExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return Offer::select('type', 'custom', 'written_in_price', 'sizewater', 'price', 'amount')->get();
+        return Offer::where('user_id', Auth::id())->select('type', 'quantity', 'quantity_written', 'measurement', 'price', 'amount')->get();
     }
 
     /**
@@ -22,12 +23,12 @@ class OffersExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'TYPE',
-            'CUSTOM',
-            'WRITTEN IN PIECE',
-            'SIZEWATER',
-            'PRICE',
-            'AMOUNT',
+            'Type',
+            'Quantity',
+            'Quantity Written',
+            'Measurement',
+            'Price',
+            'Amount',
         ];
     }
 }

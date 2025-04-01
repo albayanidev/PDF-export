@@ -9,9 +9,9 @@ class OfferForm extends Form
 {
     public $offerId = null;
     public $type = '';
-    public $custom = '';
-    public $written_in_price = '';
-    public $sizewater = '';
+    public $quantity = '';
+    public $quantity_written = '';
+    public $measurement = '';
     public $price = '';
     public $amount = '';
 
@@ -19,9 +19,9 @@ class OfferForm extends Form
     {
         return [
             'type' => 'required|min:1',
-            'custom' => 'required|min:1',
-            'written_in_price' => 'required|min:1',
-            'sizewater' => 'required|min:1',
+            'quantity' => 'required|min:1',
+            'quantity_written' => 'required|min:1',
+            'measurement' => 'required|min:1',
             'price' => 'required|min:1',
             'amount' => 'required|min:1',
         ];
@@ -45,9 +45,9 @@ class OfferForm extends Form
             [
                 'user_id' => $user->id,
                 'type' => $this->type,
-                'custom' => $this->custom,
-                'written_in_price' => $this->written_in_price,
-                'sizewater' => $this->sizewater,
+                'quantity' => $this->quantity,
+                'quantity_written' => $this->quantity_written,
+                'measurement' => $this->measurement,
                 'price' => $this->price,
                 'amount' => $this->amount,
             ]
@@ -67,9 +67,9 @@ class OfferForm extends Form
 
         $this->offerId = $offer->id;
         $this->type = $offer->type;
-        $this->custom = $offer->custom;
-        $this->written_in_price = $offer->written_in_price;
-        $this->sizewater = $offer->sizewater;
+        $this->quantity = $offer->quantity;
+        $this->quantity_written = $offer->quantity_written;
+        $this->measurement = $offer->measurement;
         $this->price = $offer->price;
         $this->amount = $offer->amount;
     }

@@ -12,10 +12,7 @@ use function Livewire\Volt\{form, mount};
 form(DataForm::class);
 
 mount(function () {
-    $user = Auth::user();
-    $data = $user->data();
-
-    $this->form->fill($data->first()->toArray());
+    $this->form->resetForm();
 });
 
 $updateData = function () {
@@ -31,15 +28,12 @@ $updateData = function () {
             <flux:input wire:model="form.work_nature" label="Nature of the Work" />
             <flux:input wire:model="form.work_quality" label="Quality of the Work" />
             <flux:input wire:model="form.purchased_items" label="Number of Items Purchased" />
-            <flux:input wire:model="form.approval_date" label="Approval Date" type="date" />
             <flux:input wire:model="form.approvals_number" label="Number of Approvals" />
-            <flux:input wire:model="form.1_offer" label="1st Offer" />
-            <flux:input wire:model="form.2_offer" label="2nd Offer" />
-            <flux:input wire:model="form.3_offer" label="3rd Offer" />
-            <flux:input wire:model="form.4_offer" label="4th Offer" />
+            <flux:input wire:model="form.offer_1" label="1st Offer" />
+            <flux:input wire:model="form.offer_2" label="2nd Offer" />
+            <flux:input wire:model="form.offer_3" label="3rd Offer" />
+            <flux:input wire:model="form.offer_4" label="4th Offer" />
             <flux:input wire:model="form.amount_without_vat" label="Amount Without VAT" />
-            <flux:input wire:model="form.report_issuance_date" label="Need Report Issuance Date" type="date" />
-            <flux:input wire:model="form.report_issuance_time" label="Need Report Issuance Time" type="date" />
             <flux:input wire:model="form.company_receiving_offer" label="Company Receiving the Offer" />
             <flux:input wire:model="form.address" label="Address" />
             <flux:input wire:model="form.tax_number" label="Tax Number" />
@@ -52,14 +46,22 @@ $updateData = function () {
             <flux:input wire:model="form.commission_member_title" label="Commission Memeber's Title" />
             <flux:input wire:model="form.department_head" label="Department Head" />
             <flux:input wire:model="form.department" label="Department" />
-            <flux:input wire:model="form.invoice_date" label="Invoice Date" type="date" />
             <flux:input wire:model="form.inspection_member_name" label="Inspection Member's Name" />
             <flux:input wire:model="form.inspection_member_title" label="Inspection Member's Title" />
             <flux:input wire:model="form.warehouse_depot_sequence_number" label="Warehouse-Depot Sequence Number" />
             <flux:input wire:model="form.warehouse_depot_volumn_number" label="Warehouse-Depot Volume Number" />
+            <flux:input wire:model="form.school_principal" label="School Prinicipal" />
+            <flux:input wire:model="form.vice_principal" label="Vice Prinicipal" />
+            <flux:input wire:model="form.nys_budget_amount" label="NYS Available Budget Amount" />
+            <flux:input wire:model="form.document_number" label="Document Number" />
+            <flux:input wire:model="form.to_office" label="To the Directorate" />
+            <flux:input wire:model="form.nys_budget_allocation" label="To the Office" />
+            <flux:input wire:model="form.to_directorate" label="NYS Budget Allocation" />
+            <flux:input wire:model="form.approval_date" label="Approval Date" type="date" />
+            <flux:input wire:model="form.report_issuance_date" label="Need Report Issuance Date" type="date" />
+            <flux:input wire:model="form.report_issuance_time" label="Need Report Issuance Time" type="date" />
+            <flux:input wire:model="form.invoice_date" label="Invoice Date" type="date" />
             <flux:input wire:model="form.need_notification_date" label="Need Notification Date" type="date" />
-            <flux:input wire:model="form.school_priniciple" label="School Prinicipal" />
-            <flux:input wire:model="form.vice_principle" label="Vice Prinicipal" />
         </div>
         <div class="flex items-center gap-4 mt-6">
             <div class="flex items-center justify-end">

@@ -13,10 +13,10 @@ class Data extends Model
         'purchased_items',
         'approval_date',
         'approvals_number',
-        '1_offer',
-        '2_offer',
-        '3_offer',
-        '4_offer',
+        'offer_1',
+        'offer_2',
+        'offer_3',
+        'offer_4',
         'amount_without_vat',
         'report_issuance_date',
         'report_issuance_time',
@@ -38,8 +38,21 @@ class Data extends Model
         'warehouse_depot_sequence_number',
         'warehouse_depot_volumn_number',
         'need_notification_date',
-        'school_priniciple',
-        'vice_principle',
+        'school_principal',
+        'vice_principal',
+        'nys_budget_amount',
+        'document_number',
+        'to_office',
+        'nys_budget_allocation',
+        'to_directorate',
+    ];
+
+    protected $casts = [
+        'approval_date' => 'datetime',
+        'report_issuance_date' => 'datetime',
+        'report_issuance_time' => 'datetime',
+        'invoice_date' => 'datetime',
+        'need_notification_date' => 'datetime',
     ];
 
     public function user()
